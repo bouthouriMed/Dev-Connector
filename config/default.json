@@ -1,4 +1,6 @@
 {
     "mongoURI": "mongodb+srv://bouthouriMed:123456789Aa@cluster0.swp2z.mongodb.net/dev-connector?retryWrites=true&w=majority",
-    "jwtSecret" :"jwtSecret"
+    "jwtSecret" : "jwtSecret",
+    "githubClientId": "Iv1.58474304245c6617",
+    "githubClientSecret": "7fed639839c78eeff8637a340686ad49a030457c"
 }
