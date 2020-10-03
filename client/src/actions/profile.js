@@ -212,7 +212,7 @@ export const deleteEducation = (id) => async (dispatch) => {
       payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
-};
+};  
 
 // Get github repos
 export const getGithubRepos = (username) => async (dispatch) => {

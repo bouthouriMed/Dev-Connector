@@ -1,3 +1,4 @@
+// Auth actions
 export const SET_ALERT = "SET_ALERT" ;
 export const CLEAR_ALERT = "CLEAR_ALERT" ;
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
@@ -8,6 +9,7 @@ export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAIL = "LOGIN_FAIL";
 export const LOGOUT = "LOGOUT";
 
+// Porfile actions
 export const GET_CURRENT_PROFILE = "GET_CURRENT_PROFILE";
 export const GET_PROFILES = "GET_PROFILES";
 export const GET_REPOS = "GET_REPOS";
@@ -17,3 +19,5 @@ export const PROFILE_ERROR = "PROFILE_ERROR";
 export const CLEAR_PROFILE = "CLEAR_PROFILE";
 export const CREATE_UPDATE_PROFILE = "CREATE_UPDATE_PROFILE";
 export const ADD_EXPERIENCE = "ADD_EXPERIENCE"
+
+// Post actions

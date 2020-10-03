@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import Moment from "react-moment";
+import { capitalize } from '../../utils/capitalize'
 
 const ProfileExperience = ({ profile: { experience } }) => {
   return (
@@ -10,7 +11,7 @@ const ProfileExperience = ({ profile: { experience } }) => {
           {experience.map((exp) => (
             <Fragment>
               <div>
-                <h3 className="text-dark">{exp.company}</h3>
+                <h3 className="text-dark">{capitalize(exp.company)}</h3>
                 <p>
                   <Moment format="DD/MM/YYYY">{exp.from}</Moment> -{" "}
                   {exp.to === null || exp.to === "" ? (
@@ -21,7 +22,7 @@ const ProfileExperience = ({ profile: { experience } }) => {
                 </p>
                 <p>
                   <strong>Position: </strong>
-                  {exp.title}
+                  {capitalize(exp.title)}
                 </p>
                 {exp.description && (
                   <p>

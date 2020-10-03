@@ -11,7 +11,7 @@ import ProfileTop from "./ProfileTop";
 import ProfileGithub from "./ProfileGithub";
 
 const Profile = ({
-  profile: { profile, loading },
+  profile: { profile, loading, repos },
   auth,
   getProfileById,
   match,
@@ -38,11 +38,11 @@ const Profile = ({
               </Link>
             )}
           <div class="profile-grid my-1">
-            <ProfileTop profile={profile} />
+            <ProfileTop profile={profile} repos={repos} />
             <ProfileAbout profile={profile} />
             <ProfileExperience profile={profile} />
             <ProfileEducation profile={profile} />
-            <ProfileGithub profile={profile} />
+            <ProfileGithub username={profile.githubusername} />
           </div>
         </Fragment>
       )}

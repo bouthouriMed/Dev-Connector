@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import {toCamelCase} from '../../utils/toCamelCase'
+import {capitalize} from '../../utils/capitalize'
 
 const ProfileTop = ({
   profile: {
@@ -15,11 +15,11 @@ const ProfileTop = ({
     <Fragment>
       <div className="profile-top bg-primary p-2">
         <img className="round-img my-1" src={avatar} alt="" />
-        <h1 className="large">{toCamelCase(name)}</h1>
+        <h1 className="large">{capitalize(name)}</h1>
         <p className="lead">
-          {status} {company && <span> at {toCamelCase(company)}</span>}
+          {status} {company && <span> at {capitalize(company)}</span>}
         </p>
-        <p>{location && <span> {toCamelCase(location)}</span>}</p>
+        <p>{location && <span> {capitalize(location)}</span>}</p>
         <div className="icons my-1">
           {website && (
             <a href={website} target="_blank" rel="noopener noreferrer">

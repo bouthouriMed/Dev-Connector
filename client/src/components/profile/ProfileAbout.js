@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import {toCamelCase} from '../../utils/toCamelCase'
+import {capitalize} from '../../utils/capitalize'
 
 const ProfileAbout = ({ profile: { user: {name}, bio, skills } }) => {
   return (
@@ -7,7 +7,7 @@ const ProfileAbout = ({ profile: { user: {name}, bio, skills } }) => {
       <div className="profile-about bg-light p-2">
         {bio && (
           <Fragment>
-            <h2 className="text-primary">{ toCamelCase(`${name.trim().split(' ')[0]}'s Bio`)}</h2>
+            <h2 className="text-primary">{ capitalize(`${name.trim().split(' ')[0]}'s Bio`)}</h2>
             <p>{bio}</p>
 
           </Fragment>
