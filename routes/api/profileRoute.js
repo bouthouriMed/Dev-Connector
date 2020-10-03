@@ -16,7 +16,7 @@ router.get("/me", auth, async (req, res) => {
   try {
     const profile = await Profile.findOne({
       user: req.user.id,
-    }).populate("User", ["name", "avatar"]);
+    }).populate("user", ["name", "avatar"]);
 
     if (!profile) {
       return res.status(400).json({ msg: "There is no profile for this user" });
@@ -61,6 +61,7 @@ router.post(
       linkedin,
     } = req.body;
 
+    // Build profileFields object
     const profileFields = {};
 
     profileFields.user = req.user.id;
@@ -75,6 +76,7 @@ router.post(
       profileFields.skills = skills.split(",").map((skill) => skill.trim());
     }
 
+    // Build social object
     profileFields.social = {};
     if (youtube) profileFields.social.youtube = youtube;
     if (twitter) profileFields.social.twitter = twitter;
@@ -111,15 +113,12 @@ router.post(
 // @access  Public
 router.get("/", async (req, res) => {
   try {
-    const profiles = await Profile.find().populate("User", ["name", "avatar"]);
+    const profiles = await Profile.find().populate("user", ["name", "avatar"]);
 
-    if (!profiles) {
-      return res.json({ msg: "There's no profile to load" });
-    }
     res.json(profiles);
   } catch (err) {
     console.error(err.message);
-    res.status(500).json({ msg: "Server Error" });
+    res.status(500).send("Server Error");
   }
 });
 
@@ -128,7 +127,9 @@ router.get("/", async (req, res) => {
 // @access  Public
 router.get("/user/:id", async (req, res) => {
   try {
-    const profile = await Profile.findOne({ user: req.params.id });
+    const profile = await Profile.findOne({
+      user: req.params.id,
+    }).populate("user", ["name", "avatar"]);
 
     if (!profile) return res.status(400).json({ msg: "Profile not found" });
 
@@ -155,7 +156,7 @@ router.delete("/", auth, async (req, res) => {
 
     // @todo _ Delete user posts
 
-    res.json({ msg: "user deleted" });
+    res.json({ msg: "User deleted" });
   } catch (err) {
     console.error(err.message);
     res.status(500).json({ msg: "Server Error" });
@@ -319,30 +320,23 @@ router.delete("/education/:id", auth, async (req, res) => {
 // @route   GET api/profile/github/:username
 // @desc    Get  user repos from github (bugg)
 // @access  Public
-router.get("/github/:username", (req, res) => {
+router.get('/github/:username', async (req, res) => {
   try {
-    const options = {
-      uri: `http://api/github.com/users/${
-        req.params.username
-      }/repos?per_page=5&sort=created:asc&client_id=${config.get(
-        "githubClientId"
-      )}&client_secret=${config.get("githubClientSecret")}`,
-      method: 'GET',
-      headers: { 'user-agent': 'node.js'}
+    const uri = encodeURI(
+      `https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc`
+    );
+    const headers = {
+      'user-agent': 'node.js',
+      Authorization: `token ${config.get('githubToken')}`
     };
 
-    request(options, (error, response, body) => {
-      if(error) console.error(error.message);
-
-      if(response.statusCode !== 200) {
-        res.status(404).json({ msg: 'Github profile not found'})
-      };
-      res.json(JSON.parse(body))
-    })
+    const gitHubResponse = await axios.get(uri, { headers });
+    return res.json(gitHubResponse.data);
   } catch (err) {
     console.error(err.message);
-    res.status(500).json({ msg: "Server Error" });
+    return res.status(404).json({ msg: 'No Github profile found' });
   }
 });
+
 
 module.exports = router;

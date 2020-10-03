@@ -22,7 +22,7 @@ router.get("/", auth, async (req, res) => {
 });
 
 // @route   Post api/auth
-// @desc    Authenticate the user
+// @desc    Authenticate (Login) the user
 // @access  Public
 router.post(
   "/",
@@ -59,7 +59,7 @@ router.post(
       const payload = {
         user: {
           id: user.id,
-          name: user.name
+          user: req.user
         },
       };
 
@@ -69,7 +69,7 @@ router.post(
         { expiresIn: "7 days" },
         (err, token) => {
           if (err) throw err;
-          res.json({ token, name: user.name });
+          res.json({ token });
         }
       );
     } catch (err) {
