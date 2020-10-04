@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 
 import { logout } from "../../actions/auth";
 
-function Navbar({ isAuthenticated, logout, history}) {
+function Navbar({ isAuthenticated, logout, history }) {
   const guestLinks = (
     <ul>
       <li>
@@ -33,19 +33,21 @@ function Navbar({ isAuthenticated, logout, history}) {
       </li>
 
       <li>
-        <Link to="/dashboard">Dashboad</Link>
+        <Link to="/dashboard">
+          <i className="fas fa-user" /> <span>Dashboard</span>
+        </Link>
       </li>
 
       <li>
-        <a href='#!' onClick={() => logout(history)}>
-        Logout
-        </a>   
+        <a href="#!" onClick={() => logout(history)}>
+          <i className="fas fa-sign-out-alt" />{" "}
+          <span className="hide-sm">Logout</span>
+        </a>
       </li>
-
     </ul>
   );
 
-  return (   
+  return (
     <Fragment>
       <nav className="navbar bg-dark">
         <h1>
@@ -53,7 +55,7 @@ function Navbar({ isAuthenticated, logout, history}) {
             <i className="fas fa-code"></i> DevConnector
           </Link>
         </h1>
-        { isAuthenticated ? authLinks : guestLinks }
+        {isAuthenticated ? authLinks : guestLinks}
       </nav>
     </Fragment>
   );
