@@ -29,7 +29,7 @@ function Navbar({ isAuthenticated, logout, history}) {
       </li>
 
       <li>
-        <Link to="/post">Posts</Link>
+        <Link to="/posts">Posts</Link>
       </li>
 
       <li>

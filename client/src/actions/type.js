@@ -17,7 +17,13 @@ export const NO_REPOS = "NO_REPOS";
 export const UPDATE_PROFILE = "UPDATE_PROFILE";
 export const PROFILE_ERROR = "PROFILE_ERROR";
 export const CLEAR_PROFILE = "CLEAR_PROFILE";
-export const CREATE_UPDATE_PROFILE = "CREATE_UPDATE_PROFILE";
-export const ADD_EXPERIENCE = "ADD_EXPERIENCE"
 
 // Post actions
+export const GET_ALL_POSTS = "GET_ALL_POSTS"
+export const GET_SINGLE_POST = "GET_SINGLE_POST"
+export const POST_ERROR = "POST_ERROR"
+export const UPDATE_LIKES = "UPDATE_LIKES"
+export const DELETE_POST = "DELETE_POST"
+export const CREATE_POST = "CREATE_POST"
+export const ADD_COMMENT = "ADD_COMMENT"
+export const DELETE_COMMENT = "DELETE_COMMENT"

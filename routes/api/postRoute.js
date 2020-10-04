@@ -30,12 +30,14 @@ router.post(
         user: req.user.id,
       };
 
-      let post = await Post.findOne({ user: req.user.id });
+      
 
       //   Create new post
       post = new Post(newPost);
 
       await post.save();
+
+    
       res.json(post);
     } catch (err) {
       console.error(err.message);
@@ -121,7 +123,7 @@ router.put("/like/:id", auth, async (req, res) => {
 
     await post.save();
 
-    res.json(post);
+    res.json(post.likes);
   } catch (err) {
     console.error(err.message);
     res.status(500).json({ msg: "Server Error" });
@@ -152,6 +154,7 @@ router.put("/unlike/:id", auth, async (req, res) => {
 
     await post.save();
 
+
     res.json(post.likes);
   } catch (err) {
     console.error(err.message);
@@ -173,8 +176,9 @@ router.post(
     }
 
     try {
-      let user = await User.findById(req.user.id);
+      let user = await User.findById(req.user.id).select('-password')
       let post = await Post.findById(req.params.post_id);
+    
 
       const newComment = {
         text: req.body.text,
@@ -217,12 +221,10 @@ router.delete("/comment/:post_id/:comment_id", auth, async (req, res) => {
       return res.status(401).json({ msg : 'User unauthorised'})
     };
 
-    // Get remove index
-    const removeIndex = post.comments
-      .map((comment) => comment.user.toString())
-      .indexOf(req.user.id);
+    post.comments = post.comments.filter(
+      ({ id }) => id !== req.params.comment_id
+    );
 
-    post.comments.splice(removeIndex, 1);
 
     await post.save();
 

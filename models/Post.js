@@ -10,39 +10,45 @@ const postSchema = new mongoose.Schema({
     required: true,
   },
   name: {
-      type: String,
+    type: String,
   },
   avatar: {
-      type: String,
+    type: String,
   },
   likes: [
-      {   
-          user: {
-              type: mongoose.Schema.Types.ObjectId,
-              ref: 'user'
-          }
-      }
+    {
+      user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "user",
+      },
+    },
   ],
   comments: [
-      {
-          user: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'user'
-          },
-          text: {
-              type: String,
-              required: true
-          },
-          date: {
-            type: Date,
-            default: Date.now
-          }
-      }
+    {
+      user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "user",
+      },
+      text: {
+        type: String,
+        required: true,
+      },
+      name: {
+        type: String,
+      },
+      avatar: {
+        type: String,
+      },
+      date: {
+        type: Date,
+        default: Date.now,
+      },
+    },
   ],
   date: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
 });
 
-module.exports = Post = mongoose.model('Post', postSchema)
+module.exports = Post = mongoose.model("post", postSchema);

@@ -1,5 +1,5 @@
 {
     "mongoURI": "mongodb+srv://bouthouriMed:123456789Aa@cluster0.swp2z.mongodb.net/dev-connector?retryWrites=true&w=majority",
     "jwtSecret" : "jwtSecret",
-    "githubToken" : "006f54d495c1f85440fad849adaa23f02f835a1a" 
+    "githubToken" : "e6bdc7d0d71c082f6ab0914502868dfe0417e907" 
 }
